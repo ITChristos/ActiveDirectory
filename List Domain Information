@@ -1,0 +1,43 @@
+# Returns information about the current Active Directory domain.
+
+use Win32::OLE('in'); 
+use constant wbemFlagReturnImmediately => 0x10; 
+use constant wbemFlagForwardOnly => 0x20; 
+ 
+$computer = "."; 
+$objWMIService = Win32::OLE->GetObject 
+    ("winmgmts:\\\\$computer\\root\\CIMV2") or die "WMI connection failed.\n"; 
+$colItems = $objWMIService->ExecQuery 
+    ("SELECT * FROM Win32_NTDomain","WQL",wbemFlagReturnImmediately | wbemFlagForwardOnly); 
+ 
+foreach my $objItem (in $colItems) 
+{ 
+      print "Caption: $objItem->{Caption}\n"; 
+      print "Client Site Name: $objItem->{ClientSiteName}\n"; 
+      print "Creation Class Name: $objItem->{CreationClassName}\n"; 
+      print "Dc Site Name: $objItem->{DcSiteName}\n"; 
+      print "Description: $objItem->{Description}\n"; 
+      print "Dns Forest Name: $objItem->{DnsForestName}\n"; 
+      print "Domain Controller Address: $objItem->{DomainControllerAddress}\n"; 
+      print "Domain Controller Address Type: $objItem->{DomainControllerAddressType}\n"; 
+      print "Domain Controller Name: $objItem->{DomainControllerName}\n"; 
+      print "Domain Guid: $objItem->{DomainGuid}\n"; 
+      print "Domain Name: $objItem->{DomainName}\n"; 
+      print "DS Directory Service Flag: $objItem->{DSDirectoryServiceFlag}\n"; 
+      print "DS Dns Controller Flag: $objItem->{DSDnsControllerFlag}\n"; 
+      print "DS Dns Domain Flag: $objItem->{DSDnsDomainFlag}\n"; 
+      print "DS Dns Forest Flag: $objItem->{DSDnsForestFlag}\n"; 
+      print "DS Global Catalog Flag: $objItem->{DSGlobalCatalogFlag}\n"; 
+      print "DS Kerberos Distribution Center Flag: $objItem->{DSKerberosDistributionCenterFlag}\n"; 
+      print "DS Primary Domain Controller Flag: $objItem->{DSPrimaryDomainControllerFlag}\n"; 
+      print "DS Time Service Flag: $objItem->{DSTimeServiceFlag}\n"; 
+      print "DS Writable Flag: $objItem->{DSWritableFlag}\n"; 
+      print "Install Date: $objItem->{InstallDate}\n"; 
+      print "Name: $objItem->{Name}\n"; 
+      print "Name Format: $objItem->{NameFormat}\n"; 
+      print "Primary Owner Contact: $objItem->{PrimaryOwnerContact}\n"; 
+      print "Primary Owner Name: $objItem->{PrimaryOwnerName}\n"; 
+      print "Roles: " . join(",", (in $objItem->{Roles})) . "\n"; 
+      print "Status: $objItem->{Status}\n"; 
+      print "\n"; 
+} 
