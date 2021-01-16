@@ -1,0 +1,21 @@
+The following table provides a guide to the naming conventions. 
+Included in the table is the location of each account/group, its name, and how these accounts/groups are referenced.
+
+Account/Group Location	                                        Name of Account/Group	                            How It is Referenced in this Document
+
+Active Directory - each domain	                                Administrator	                                    Built-in Administrator account
+
+Active Directory - each domain	                                Administrators	                                    Built-in Administrators (BA) group
+
+Active Directory - each domain	                                Domain Admins	                                    Domain Admins (DA) group
+
+Active Directory - forest root domain	                        Enterprise Admins	                                Enterprise Admins (EA) group
+
+Local computer security accounts manager (SAM) database 
+on computers running Windows Server and workstations that 
+are not domain controllers	                                    Administrator	                                    Local Administrator account
+
+Local computer security accounts manager (SAM) database 
+on computers running Windows Server and workstations that 
+are not domain controllers	                                    Administrators	                                    Local Administrators group
+

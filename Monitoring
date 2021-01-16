@@ -1,0 +1,17 @@
+#view list of currrently configured auditing subcategories on a computer
+auditpol /get /category:*
+
+#To list all the available auditing subcategories, review the Advanced Audit Policy container in a Group Policy Object, 
+#or type the following at a command prompt on any computer
+auditpol /list /subcategory:*
+
+Audit Policy Recommendations:
+https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/plan/security-best-practices/audit-policy-recommendations
+
+Active Directory Objects and Attributes to Monitor
+Systems for disabling or removal of antivirus and anti-malware software (automatically restart protection when it is manually disabled)
+Administrator accounts for unauthorized changes
+Activities that are performed by using privileged accounts (automatically remove account when suspicious activities are completed or allotted time has expired)
+Privileged and VIP accounts in AD DS. Monitor for changes, particularly changes to attributes on the Account tab (for example, cn, name, sAMAccountName, userPrincipalName, or userAccountControl). In addition to monitoring the accounts, restrict who can modify the accounts to as small a set of administrative users as possible.
+Changes to the properties and membership of following AD DS groups: Enterprise Admins (EA), Domain Admins (DA), Administrators (BA), and Schema Admins (SA)
+Disabled privileged accounts (such as built-in Administrator accounts in Active Directory and on member systems) for enabling the accounts

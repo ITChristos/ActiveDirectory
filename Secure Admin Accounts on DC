@@ -1,0 +1,7 @@
+In each domain in the forest, the Default Domain Controllers policy or a policy linked to the Domain Controllers OU should be modified to add each domain's Administrator account to the following user rights in Computer Configuration\Policies\Windows Settings\Security Settings\Local Policies\User Rights Assignments:
+
+Deny access to this computer from the network
+Deny log on as a batch job
+Deny log on as a service
+Deny log on through Remote Desktop Services
+

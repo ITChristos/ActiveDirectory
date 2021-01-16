@@ -1,0 +1,4 @@
+When you have secured each domain's Administrator account and disabled it, you should configure auditing to monitor for changes to the account. 
+If the account is enabled, its password is reset, or any other modifications are made to the account, alerts should be sent to the users or teams 
+responsible for administration of AD DS, in addition to incident response teams in your organization.
+

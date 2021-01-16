@@ -1,0 +1,12 @@
+As is the case with the Enterprise Admins group, membership in Domain Admins groups should be required only in build or disaster-recovery scenarios. 
+There should be no day-to-day user accounts in the DA group with the exception of the local Administrator account for the domain.
+
+When DA access is required, the accounts needing this level of access should be temporarily placed in the DA group for the domain in question.
+
+In GPOs linked to OUs containing member servers and workstations in each domain, the DA group should be added to the following user rights:
+
+Deny access to this computer from the network
+Deny log on as a batch job
+Deny log on as a service
+Deny log on locally
+Deny log on through Remote Desktop Services

@@ -1,0 +1,5 @@
+Run Kerberroast
+Remove unnecessary SPNs
+Check password strength on service accounts
+Restrict virtual admin acces to domain controllers
+Manage DSRM password

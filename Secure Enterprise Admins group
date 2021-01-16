@@ -1,0 +1,9 @@
+As described earlier, the Enterprise Admins group should contain no users on a day-to-day basis, with the possible exception of the forest 
+root domain's Administrator account, which should be secured as described in Appendix D: Securing Built-In Administrator Accounts in Active Directory.
+
+In GPOs linked to OUs containing member servers and workstations in each domain, the EA group should be added to the following user rights:
+Deny access to this computer from the network
+Deny log on as a batch job
+Deny log on as a service
+Deny log on locally
+Deny log on through Remote Desktop Services.
