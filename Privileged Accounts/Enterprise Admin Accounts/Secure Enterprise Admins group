@@ -1,0 +1,78 @@
+https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/plan/security-best-practices/appendix-e--securing-enterprise-admins-groups-in-active-directory
+
+As described earlier, the Enterprise Admins group should contain no users on a day-to-day basis, with the possible exception of the forest 
+root domain's Administrator account, which should be secured as described in Appendix D: Securing Built-In Administrator Accounts in Active Directory.
+Enterprise Admins are, by default, members of the Administrators group in each domain in the forest. You should not remove the EA group from the 
+Administrators groups in each domain because in the event of a forest disaster recovery scenario, EA rights will likely be required.
+
+In GPOs linked to OUs containing member servers and workstations in each domain, the EA group should be added to the following user rights in 
+Computer Configuration\Policies\Windows Settings\Security Settings\Local Policies\User Rights Assignments:
+    Deny access to this computer from the network
+    Deny log on as a batch job
+    Deny log on as a service
+    Deny log on locally
+    Deny log on through Remote Desktop Services.
+
+Server Manager -> Tools -> ADUC
+    If you are not managing the root domain for the forest, in the console tree, right-click , and then click Change Domain (where is the name of 
+    the domain you're currently administering)
+        In the Change domain dialog box, click Browse, -> root domain for the forest -> OK
+
+To remove all members from the EA group
+    Double-click the Enterprise Admins group and then click the Members tab.
+    Select a member of the group, click Remove, click Yes, and click OK
+
+Group Policy Management
+    In the console tree, expand \Domains\, and then Group Policy Objects (where is the name of the forest and is the name of the domain where you want 
+    to set the Group Policy).
+!!!!!!!!!In a forest that contains multiple domains, a similar GPO should be created in each domain that requires that the Enterprise Admins group be secured.
+    Right-click Group Policy Objects -> New
+        Name: Secure Enterprise Admins
+    Edit -> Computer Configuration\Policies\Windows Settings\Security Settings\Local Policies, and click User Rights Assignment
+
+Configure the user rights to prevent members of the Enterprise Admins group from accessing member servers and workstations over the network by doing the following
+    Double-click Deny access to this computer from the network -> Define these policy settings
+    Add User or Group -> Browse
+    Type Administrator -> Check Names -> OK
+        Verify that the account is displayed in \Enterprise Admins format
+
+Configure the user rights to prevent members of the Enterprise Admins group from logging on as a batch job by doing the following
+    Double-click Deny log on as a batch job -> Define these policy settings
+    Click Add User or Group -> Browse
+        !!!!!!In a forest that contains multiple domains, click Locations and select the root domain of the forest!!!!!!
+    Type Administrator -> Check Names -> OK
+        Verify that the account is displayed in \Enterprise Admins format
+
+Configure the user rights to prevent members of the EA group from logging on as a service by doing the following
+    Double-click Deny log on as a service -> Define these policy settings
+    Click Add User or Group -> Browse
+        !!!!!!In a forest that contains multiple domains, click Locations and select the root domain of the forest!!!!!!
+    Type Administrator -> Check Names -> OK
+        Verify that the account is displayed in \Enterprise Admins format
+
+Configure user rights to prevent members of the Enterprise Admins group from logging on locally to member servers and workstations by doing the following
+    Double-click Deny log on locally -> Define these policy settings
+    Click Add User or Group -> Browse
+        !!!!!!In a forest that contains multiple domains, click Locations and select the root domain of the forest!!!!!!
+    Type Administrator -> Check Names -> OK
+        Verify that the account is displayed in \Enterprise Admins format
+
+Configure the user rights to prevent members of the Enterprise Admins group from accessing member servers and workstations via Remote Desktop Services by doing the following
+    Double-click Deny log on through Remote Desktop Services -> Define these policy settings
+    Click Add User or Group -> Browse
+        !!!!!!In a forest that contains multiple domains, click Locations and select the root domain of the forest!!!!!!
+    Type Administrator -> Check Names -> OK. 
+        Verify that the account is displayed in \Enterprise Admins format
+
+To exit Group Policy Management Editor, click File -> Exit
+
+In Group Policy Management, link the GPO to the member server and workstation OUs by doing the following
+    Navigate to the \Domains\ (where is the name of the forest and is the name of the domain where you want to set the Group Policy)
+    Right-click the OU that the GPO will be applied to and click Link an existing GPO
+    Select "Secure Enterprise Admins" -> OK
+
+    Create links to all other OUs that contain workstations
+    Create links to all other OUs that contain member servers
+    In a forest that contains multiple domains, a similar GPO should be created in each domain that requires that the Enterprise Admins group be secured
+
+!!!!!!!If jump servers are used to administer domain controllers and Active Directory, ensure that jump servers are located in an OU to which this GPOs is not linked!!!!!!!!!

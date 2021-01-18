@@ -1,3 +1,11 @@
+https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/plan/security-best-practices/appendix-d--securing-built-in-administrator-accounts-in-active-directory
+
+Use of a domain's Administrator account should be reserved only for initial build activities, and possibly, disaster-recovery 
+scenarios. To ensure that an Administrator account can be used to effect repairs in the event that no other accounts can be 
+used, you should not change the default membership of the Administrator account in any domain in the forest. Instead, you 
+should secure the Administrator account in each domain in the forest.
+
+
 Server Manager -> Tools -> ADUC
 Right-click Administrator account -> Properties
 Click Account tab
@@ -14,7 +22,7 @@ Edit -> Computer Configuration\Policies\Windows Settings\Security Settings\Local
 Configure the user rights to prevent the Administrator account from accessing members servers and workstations over the network by doing the following
     Double-click Deny access to this computer from the network -> Define these policy settings
     Add User or Group -> Browse
-    Type "Administrator" -> Check Names -> OK
+    Type Administrator -> Check Names -> OK
         Verify that the account is displayed in \Username format
 
 Configure the user rights to prevent the Administrator account from logging on as a batch job by doing the following
@@ -32,7 +40,7 @@ Configure the user rights to prevent the Administrator account from logging on a
 Configure the user rights to prevent the BA account from accessing member servers and workstations via Remote Desktop Services by doing the following
     Double-click Deny log on through Remote Desktop Services -> Define these policy settings
     Click Add User or Group -> Browse
-        Type Administrator -> Check Names -> OK. 
+    Type Administrator -> Check Names -> OK. 
         Verify that the account is displayed in \Username format
 
 To exit Group Policy Management Editor, click File -> Exit
