@@ -1,0 +1,53 @@
+Server Manager -> Tools -> ADUC
+Right-click Administrator account -> Properties
+Click Account tab
+    Select "Account is sensitive and cannot be delegated" flag
+
+!!!!!!!!!!!!!!!!!!!!!!GPO should never be linked at the domain-level because it can make the built-in Administrator account unusable, 
+                        even in disaster recovery scenarios. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Group Policy Management
+Group Policy Objects -> New
+    Name: Restrict Administrator Accounts at the Domain-Level
+Edit -> Computer Configuration\Policies\Windows Settings\Security Settings\Local Policies, and click User Rights Assignment
+
+Configure the user rights to prevent the Administrator account from accessing members servers and workstations over the network by doing the following
+    Double-click Deny access to this computer from the network -> Define these policy settings
+    Add User or Group -> Browse
+    Type "Administrator" -> Check Names -> OK
+        Verify that the account is displayed in \Username format
+
+Configure the user rights to prevent the Administrator account from logging on as a batch job by doing the following
+    Double-click Deny log on as a batch job -> Define these policy settings
+    Click Add User or Group -> Browse
+    Type Administrator -> Check Names -> OK. 
+        Verify that the account is displayed in \Username format
+
+Configure the user rights to prevent the Administrator account from logging on as a service by doing the following
+    Double-click Deny log on as a service -> Define these policy settings
+    Click Add User or Group -> Browse
+    Type Administrator -> Check Names -> OK. 
+        Verify that the account is displayed in \Username format
+
+Configure the user rights to prevent the BA account from accessing member servers and workstations via Remote Desktop Services by doing the following
+    Double-click Deny log on through Remote Desktop Services -> Define these policy settings
+    Click Add User or Group -> Browse
+        Type Administrator -> Check Names -> OK. 
+        Verify that the account is displayed in \Username format
+
+To exit Group Policy Management Editor, click File -> Exit
+
+In Group Policy Management, link the GPO to the member server and workstation OUs by doing the following
+    Navigate to the \Domains\ (where is the name of the forest and is the name of the domain where you want to set the Group Policy)
+    Right-click the OU that the GPO will be applied to and click Link an existing GPO
+    Select "Restrict Administrator Accounts at the Domain-Level" -> OK
+    
+    Create links to all other OUs that contain workstations
+    Create links to all other OUs that contain member servers
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!When you add the Administrator account to these settings, you specify whether you are configuring a 
+local Administrator account or a domain Administrator account by how you label the accounts. For example, to add the TAILSPINTOYS domain's 
+Administrator account to these deny rights, you would browse to the Administrator account for the TAILSPINTOYS domain, which would appear as 
+TAILSPINTOYS\Administrator. If you type "Administrator" in these user rights settings in the Group Policy Object Editor, you will restrict 
+the local Administrator account on each computer to which the GPO is applied, as described earlier. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
