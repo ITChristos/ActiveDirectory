@@ -1,0 +1,114 @@
+https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/plan/security-best-practices/appendix-g--securing-administrators-groups-in-active-directory
+
+As is the case with the Enterprise Admins (EA) and Domain Admins (DA) groups, membership in the built-in Administrators (BA) 
+group should be required only in build or disaster recovery scenarios. There should be no day-to-day user accounts in the 
+Administrators group with the exception of the Built-in Administrator account for the domain, if it has been secured as 
+described in Appendix D: Securing Built-In Administrator Accounts in Active Directory.
+
+Administrators are, by default, the owners of most of the AD DS objects in their respective domains. Membership in this group 
+may be required in build or disaster recovery scenarios in which ownership or the ability to take ownership of objects is required.
+
+DAs and EAs inherit a number of their rights and permissions by virtue of their default membership in the Administrators group. 
+Default group nesting for privileged groups in Active Directory should not be modified, and each domain's Administrators group 
+should be secured as described
+
+
+For the Administrators group in each domain in the forest
+    Remove all members from the Administrators group, with the possible exception of the built-in Administrator account for the domain,
+    provided it has been secured as described in Appendix D: Securing Built-In Administrator Accounts in Active Directory.
+
+In GPOs linked to OUs containing member servers and workstations in each domain, the BA group should be added to the following user rights 
+in Computer Configuration\Policies\Windows Settings\Security Settings\Local Policies\ User Rights Assignment:
+    Deny access to this computer from the network
+    Deny log on as a batch job
+    Deny log on as a service
+
+At the domain controllers OU in each domain in the forest, the Administrators group should be granted the following user rights:
+
+    Access this computer from the network
+    Allow log on locally
+    Allow log on through Remote Desktop Services
+
+In Server Manager, click Tools -> Active Directory Users and Computers
+
+To remove all members from the Administrators group
+    Double-click the Administrators group -> Members tab
+    Select a member of the group -> Remove -> Yes -> OK.
+
+Group Policy Management Snap-in
+In the console tree, expand <Forest>\Domains\<Domain>, and then Group Policy Objects (where <Forest> is the name of the forest and <Domain> 
+is the name of the domain where you want to set the Group Policy)
+
+Right-click Group Policy Objects -> New
+        Name: Secure Administrators Groups
+    Edit -> Computer Configuration\Policies\Windows Settings\Security Settings\Local Policies -> User Rights Assignment
+
+Configure the user rights to prevent members of the Administrators group from accessing member servers and workstations over the network by doing the following
+    Double-click Deny access to this computer from the network -> Define these policy settings
+    Add User or Group -> Browse
+    Type Administrators -> Check Names -> OK
+        Verify that the account is displayed in Administrators format
+
+Configure the user rights to prevent members of the Administrators group from logging on as a batch job by doing the following
+    Double-click Deny log on as a batch job -> Define these policy settings
+    Add User or Group -> Browse
+    Type Administrators -> Check Names -> OK
+        Verify that the account is displayed in Administrators format
+
+Configure the user rights to prevent members of the Administrators group from logging on as a service by doing the following
+    Double-click Deny log on as a service -> Define these policy settings
+    Add User or Group -> Browse
+    Type Administrators -> Check Names -> OK
+        Verify that the account is displayed in Administrators format
+
+
+To exit Group Policy Management Editor, click File -> Exit
+
+
+In Group Policy Management, link the GPO to the member server and workstation OUs by doing the following
+Navigate to the <Forest>>\Domains\<Domain> (where <Forest> is the name of the forest and <Domain> is the name of the domain where you want to set the Group Policy)
+Right-click the OU that the GPO will be applied to and click Link an existing GPO
+    Select "Secure Administrators Groups" -> OK
+
+    Create links to all other OUs that contain workstations
+    Create links to all other OUs that contain member servers
+
+!!!!!!!If jump servers are used to administer domain controllers and Active Directory, ensure that jump servers are located in an OU to which this GPOs is not linked!!!!!!!!!
+
+!!!!!!!Do not restrict local logons or logons through Remote Desktop Services.!!!!!!!!!!!!!!!!!
+
+
+
+
+
+In the console tree, expand \Domains\, and then Group Policy Objects (where is the name of the forest and is the name of the domain where you want to set the Group Policy)
+
+Right-click Group Policy Objects -> New
+        Name: Grant User Rights to the Administrators Group
+    Edit -> Computer Configuration\Policies\Windows Settings\Security Settings\Local Policies -> User Rights Assignment
+
+Configure the user rights to allow members of the Administrators group to access domain controllers over the network by doing the following
+    Double-click Access to this computer from the network -> Define these policy settings
+    Add User or Group -> Browse
+    Type Administrators -> Check Names -> OK
+        Verify that the account is displayed in Administrators format
+
+Configure the user rights to allow members of the Administrators group to log on through Remote Desktop Services by doing the following
+    Double-click Allow log on through Remote Desktop Services -> Define these policy settings
+    Add User or Group -> Browse
+    Type Administrators -> Check Names -> OK
+        Verify that the account is displayed in Administrators format
+
+Configure the user rights to allow members of the Administrators group to log on locally by doing the following
+    Double-click Allow log on locally -> Define these policy settings
+    Add User or Group -> Browse
+    Type Administrators -> Check Names -> OK
+        Verify that the account is displayed in Administrators format
+
+
+To exit Group Policy Management Editor, click File -> Exit
+
+
+Navigate to the \Domains\ (where is the name of the forest and is the name of the domain where you want to set the Group Policy)
+Right-click the OU that the GPO will be applied to and click Link an existing GPO
+    Select "Grant User Rights to the Administrators Group" -> OK

@@ -1,3 +1,5 @@
+https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/plan/security-best-practices/appendix-f--securing-domain-admins-groups-in-active-directory
+
 As is the case with the Domain Admins group, membership in Domain Admins groups should be required only in build or disaster-recovery scenarios. 
 There should be no day-to-day user accounts in the DA group with the exception of the local Administrator account for the domain.
 Domain Admins are, by default, members of the local Administrators groups on all member servers and workstations in their respective domains. 
@@ -15,12 +17,11 @@ Remove all members from the group, with the possible exception of the built-in A
 
 
 In GPOs linked to OUs containing member servers and workstations in each domain, the DA group should be added to the following user rights:
-
-Deny access to this computer from the network
-Deny log on as a batch job
-Deny log on as a service
-Deny log on locally
-Deny log on through Remote Desktop Services
+    Deny access to this computer from the network
+    Deny log on as a batch job
+    Deny log on as a service
+    Deny log on locally
+    Deny log on through Remote Desktop Services
 
 Group Policy Management
     In the console tree, expand <Forest>\Domains\<Domain>, and then Group Policy Objects (where <Forest> is the name of the forest and <Domain> is the name of the 
@@ -71,7 +72,7 @@ In Group Policy Management, link the GPO to the member server and workstation OU
     Right-click the OU that the GPO will be applied to and click Link an existing GPO
     Select "Secure Domain Admins" -> OK
 
-Create links to all other OUs that contain workstations
+    Create links to all other OUs that contain workstations
     Create links to all other OUs that contain member servers
     In a forest that contains multiple domains, a similar GPO should be created in each domain that requires that the Domain Admins group be secured
 
