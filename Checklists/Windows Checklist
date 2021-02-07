@@ -1,0 +1,18 @@
+1. Check IP address, subnet mask, default gateway, and DNS/DHCP configuration
+    Open CMD as Admin
+    ipconfig /all
+
+2. Clear DNS Cache
+    ipconfig /displaydns
+    ipconfig /flushdns
+
+3. 
+
+
+
+Install FileZilla Client
+LAPS
+Install Github Desktop
+Install neo4j Desktop
+
+
