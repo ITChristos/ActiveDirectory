@@ -38,13 +38,13 @@ Import-Module -Name Microsoft.PowerShell.Security
         # 5. View hidden files
         #     File Explorer -> View -> Hidden
 
-        # 19. Check Path and Temp Folders
+        # 6. Check Path and Temp Folders
             # System Properties -> Advanced -> Environment Variables
                 Get-CimInstance -ClassName Win32_Environment 
 
 # USER ACCOUNT CONTROL
 
-        # 6. User configuration
+        # 7. User configuration
         #     Control Panel -> User Accounts -> User Accounts
         #         Review all configured accounts for good policy
         #     Make Changes to your user account -> Change User Account Control Settings
@@ -55,7 +55,7 @@ Import-Module -Name Microsoft.PowerShell.Security
         #         Limit credentials stored on the device
         #     Change Administrator Password
 
-        # 7.  Disable Sticky Keys
+        # 8.  Disable Sticky Keys
         #         Control Panel -> Ease of access -> Uncheck Sticky Keys
 
             Get-CimInstance -ClassName Win32_Account
@@ -63,10 +63,10 @@ Import-Module -Name Microsoft.PowerShell.Security
 
 # SCHEDULED TASKS AND SERVICES
 
-        # 7. Scheduled Tasks
+        # 9. Scheduled Tasks
         #     Start -> Task Scheduler -> Remove all that aren't related to updates that you recognize
 
-        # 8. Get running services
+        # 10. Get running services
             Get-Service | Where-Object {$_.Status -eq "Running"}
             Get-Service |
             Where-Object {$_.DependentServices} |
@@ -74,27 +74,27 @@ Import-Module -Name Microsoft.PowerShell.Security
                 Label="NoOfDependentServices"; Expression={$_.dependentservices.count}
                 }
 
-        # 9. Autoruns
+        # 11. Autoruns
                 https://docs.microsoft.com/en-us/sysinternals/downloads/autoruns
 
-        # 14. Processes and Open Ports 
+        # 12. Processes and Open Ports 
                 netstat -ano
         # procmon
                 https://docs.microsoft.com/en-us/sysinternals/downloads/procmon
         # tcpview
                 https://docs.microsoft.com/en-us/sysinternals/downloads/tcpview
 
-        # 16. Removing Programs from Startup
+        # 13. Removing Programs from Startup
                 # Run -> msconfig
         
 # REMOTE ACCESS RESTRICTIONS
 
-        # 9. PowerShell Specific
+        # 14. PowerShell Specific
                 Disable-PSRemoting
                 Disable-PSSessionConfiguration
                 Disable-PSSessionConfiguration -Name *
 
-        # 9. Disable Remote Registry
+        # 15. Disable Remote Registry
                 Get-Service | Where-Object Name -eq RemoteRegistry
             #If it is not stopped
                 Set-Service -Name RemoteRegistry -Status Stopped
@@ -102,7 +102,7 @@ Import-Module -Name Microsoft.PowerShell.Security
 
 # UNNEEDED SOFTWARE/FEATURES
         
-        # 10. Remove unneeded softwares
+        # 16. Remove unneeded softwares
         #     Add/Remove Programs -> Remove all the junk
 
         # 17. Turn Windows Features on or off #################Develop PS Scripsts###########
@@ -116,77 +116,52 @@ Import-Module -Name Microsoft.PowerShell.Security
 
 # ANTIVIRUS/FIREWALL
 
-        # 9.  Malwarebytes download/scan
+        # 18.  Malwarebytes download/scan
                 https://www.malwarebytes.com/mwb-download/thankyou/
 
 #Restore Point
 
         Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
-        #Right Click Desktop -> Shortcut -> Target
-            # powershell -Command "Start-Process powershell.exe -ArgumentList '-ExecutionPolicy Bypass -NoExit -Command \`"Checkpoint-Computer -Description \"RestorePoint1\" -RestorePointType \"MODIFY_SETTINGS\"\`"' -Verb RunAs"
-            # PowerShell -NoProfile -ExecutionPolicy Bypass -Command “& {Start-Process PowerShell -ArgumentList ‘-NoProfile -ExecutionPolicy Bypass -NoExit -Command “Checkpoint-Computer -Description “RestorePoint1” -RestorePointType “MODIFY_SETTINGS”; ” ‘ ” -Verb RunAs}”
+        # 19.   Right Click Desktop -> Shortcut -> Target
+                    # powershell -Command "Start-Process powershell.exe -ArgumentList '-ExecutionPolicy Bypass -NoExit -Command \`"Checkpoint-Computer -Description \"RestorePoint1\" -RestorePointType \"MODIFY_SETTINGS\"\`"' -Verb RunAs"
+                    # PowerShell -NoProfile -ExecutionPolicy Bypass -Command “& {Start-Process PowerShell -ArgumentList ‘-NoProfile -ExecutionPolicy Bypass -NoExit -Command “Checkpoint-Computer -Description “RestorePoint1” -RestorePointType “MODIFY_SETTINGS”; ” ‘ ” -Verb RunAs}”
         
-        #RestorePointTyes:
-            # APPLICATION_INSTALL
-            # APPLICATION_UNINSTALL
-            # DEVICE_DRIVER_INSTALL
-            # MODIFY_SETTINGS
-            # CANCELLED_OPERATION
-            # The default value is APPLICATION_INSTALL.
-
-
+                            #RestorePointTyes:
+                                # APPLICATION_INSTALL
+                                # APPLICATION_UNINSTALL
+                                # DEVICE_DRIVER_INSTALL
+                                # MODIFY_SETTINGS
+                                # CANCELLED_OPERATION
+                                # The default value is APPLICATION_INSTALL.
 
 
 # UPDATES
 
-        # 13. Automatic updates and Service Packs
+        # 120. Automatic updates and Service Packs
         #     Search updates
 
 # LOGS AND AUDITING
 
-        # 11. Winlogbeats/Kibana #########NEEDS DEVELOPMENT##########
+        # 21. Winlogbeats/Kibana #########NEEDS DEVELOPMENT##########
         https://www.elastic.co/downloads/kibana
 
 # MISCELLANEOUS
 
-        # 15. Alternate Data Streams##############FURTHER DEVELOPMENT################
+        # 22. Alternate Data Streams##############FURTHER DEVELOPMENT################
         #     Scan with ADSSpy
                  https://www.bleepingcomputer.com/download/ads-spy/
 
-        # 20. Data Execution Prevention
+        # 23. Data Execution Prevention
         #     System Properties -> Advanced -> Performance -> Data Execution Prevention -> Turn on DEP for all programs and services
 
-        # 23. Rootkit scanning
+        # 24. Rootkit scanning
                  http://www.gmer.net/
 
-        # 24. Core isolation
+        # 25. Core isolation
         #     Memory integrity on
 
-        # 25. Secure boot
+        # 26. Secure boot
         #     Settings charm > Change PC settings > Update and Recovery > Recovery > Advanced Startup: Restart now. When the PC reboots, go to Troubleshoot > Advanced Options: UEFI Firmware Settings.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-Install FileZilla Client
-LAPS
-Install Github Desktop
-Install neo4j Desktop
-
+        # 27. Bitlocker
 
