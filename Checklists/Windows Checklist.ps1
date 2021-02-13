@@ -8,7 +8,7 @@ ipconfig /all
 Get-CimInstance -ClassName Win32_ip4routetable | FT
 Get-CimInstance -ClassName Win32_ip4PersistedRouteTable | FT
 
-# 2. Clear DNS Cache
+# 2. Clear DNS Cache (DNS Poisoning)
 ipconfig /displaydns
 ipconfig /flushdns
 
