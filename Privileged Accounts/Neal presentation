@@ -1,0 +1,30 @@
+Create  Admin OU
+    Move Admin to Admin OU
+    Create new user adminChristos
+    Users OU
+
+
+    Check GPO
+
+    Password File
+
+    Default DC Policy
+
+    Default Domain Policy
+
+    Policy Inheritance
+
+Exchange
+    Exchange Admin Center
+        servers
+
+        Mail flow 
+            SMTP Send
+            
+            Recieve Connectors
+                SMTP Relay
+                    Don't want internally creating system to relay Mail
+                    Right-click -> Scoping -> Set computers that can send mail (Only Exchange Server)
+
+                    No Public Folders
+                    
