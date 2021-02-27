@@ -163,7 +163,8 @@ Set-GPRegistryValue -Name "SMB Signing Negotiation" -key "HKLM\Computer Configur
         Get-GPResultantSetOfPolicy
             #type html
             #C:\Users\Administrator\Desktop\rsop.html
-            
+        
+        Set-ExecutionPolicy Restricted
 # Privileged Account Creation
    
 
