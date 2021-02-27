@@ -1,10 +1,20 @@
+# Change Password
+
+# Check and Install powershell script
+
 # Gather IP Adddresses for firewall
 
 Get-NetIPAddress
 Get-NetIPConfiguration
 
-# Update through Windows Update
+# Check Firewall
+
 # Run BPA
+
+# Install git-scm
+
+# Update through Windows Update
+
 
 #Check ExecutionPolicy setting
 Get-ExecutionPolicy
@@ -20,7 +30,9 @@ Update-Help
 # Group Policy Objects
 Get-GPO
 
-    # Password Policy
+# Remove unwanted Programs
+
+# Password Policy
 
 Set-ADDefaultDomainPasswordPolicy -Identity <example.com> -ComplexityEnabled $true -MinPasswordLength 14 -MinPasswordAge 1 -MaxPasswordAge 60 -LockoutDuration 00:30:00 -LockoutObservationWindow 00:30:00 -LockoutThreshold 3
     #Computer Configuration\Policies\Windows Settings\Security Settings\Account Policies\Password Policy\Enforce password history value=24
@@ -168,6 +180,8 @@ Set-GPRegistryValue -Name "SMB Signing Negotiation" -key "HKLM\Computer Configur
 # Privileged Account Creation
 
 
+# LAPS
+
 # List AD Security Settings
 
 
@@ -177,6 +191,7 @@ Set-GPRegistryValue -Name "SMB Signing Negotiation" -key "HKLM\Computer Configur
 # Bloodhound
 
 
+# File associations
 
 
 AD Snapshot with AD Explorer
