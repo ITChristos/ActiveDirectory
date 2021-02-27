@@ -166,7 +166,10 @@ Set-GPRegistryValue -Name "SMB Signing Negotiation" -key "HKLM\Computer Configur
         
         Set-ExecutionPolicy Restricted
 # Privileged Account Creation
-   
+
+
+# List AD Security Settings
+
 
 # Deep Blue
 
