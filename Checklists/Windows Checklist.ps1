@@ -137,7 +137,7 @@ Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTI
 
 # UPDATES
 
-# 120. Automatic updates and Service Packs
+# 20. Automatic updates and Service Packs
 #     Search updates
 
 # LOGS AND AUDITING
