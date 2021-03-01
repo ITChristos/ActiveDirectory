@@ -1,9 +1,0 @@
-Start slow, log only, build exception list
-Block execution from user profile folder
-
-Permit:
-C:\Windows
-C:\Program Files
-C:\Program Files (x86)
-
-Permit signed only
