@@ -1,7 +1,10 @@
 # Change Password
 
-# Check and Install powershell script
+# Allow downloads
 
+# Check and Install powershell update script
+Get-Host
+Set-ItemProperty -Path 'HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NetFramework\v4.0.30319' -Name 'SchUseStrongCrypto' -Value '1' -Type DWord
 # Gather IP Adddresses for firewall
 
 Get-NetIPAddress
@@ -21,16 +24,20 @@ Get-ExecutionPolicy
 Set-ExecutionPolicy AllSigned
 
 #Update Package Providers
-Install-PackageProvider -Name Nuget
-Install-PackageProvider -Name Chocolatey
+Install-PackageProvider -Name Nuget -Force
+Install-PackageProvider -Name Chocolatey -Force
 Import-Module grouppolicy
+Import-Module ad
+
+
+# Enable advanced features in ADUC
+# View hidden folders
 
 #Update Help
 Update-Help
 # Group Policy Objects
-Get-GPO
 
-# Remove unwanted Programs
+# Remove unwanted Programs/Features/Services
 
 # Password Policy
 
@@ -44,7 +51,9 @@ Set-ADDefaultDomainPasswordPolicy -Identity <example.com> -ComplexityEnabled $tr
     #Computer Configuration\Policies\Windows Settings\Security Settings\Account Policies\Account Lockout Policy\Account lockout duration value= 15 minutes
     #Computer Configuration\Policies\Windows Settings\Security Settings\Account Policies\Account Lockout Policy\Account lockout threshold value= 3
     #Computer Configuration\Policies\Windows Settings\Security Settings\Account Policies\Account Lockout Policy\Reset account lockout counter after value= 15
-    
+
+
+
     #Kerberos Policy
 New-GPO -Name "Kerberos Policy"
 Set-GPRegistryValue -Name "Kerberos Policy" -key "HKLM\Computer Configuration\Policies\Windows Settings\Security Settings\Account Policy\Kerberos Policy\Enforce user logon restrictions" -Type String -value enabled
@@ -179,6 +188,7 @@ Set-GPRegistryValue -Name "SMB Signing Negotiation" -key "HKLM\Computer Configur
         Set-ExecutionPolicy Restricted
 # Privileged Account Creation
 
+# Configure NTP on DC
 
 # LAPS
 
@@ -186,6 +196,8 @@ Set-GPRegistryValue -Name "SMB Signing Negotiation" -key "HKLM\Computer Configur
 
 
 # Deep Blue
+
+# Restore/Backup/Checkpoint
 
 
 # Bloodhound
