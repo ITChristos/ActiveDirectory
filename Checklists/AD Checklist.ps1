@@ -1,6 +1,16 @@
 # Change Password
+    #Ctrl + Alt + Del -> Change a Password
 
+<<<<<<< HEAD
 # Allow downloads
+=======
+# Check and Install powershell script
+    #Get current PS version
+    Get-host | select-object Version
+
+    #Update to most current stable release
+    Invoke-Expression "& { $(Invoke-RestMethod https://aka.ms/install-powershell.ps1) } -UseMSI"
+>>>>>>> 3b81faa25ab74b8006666fd88b80bd9eee785643
 
 # Check and Install powershell update script
 Get-Host
@@ -11,21 +21,32 @@ Get-NetIPAddress
 Get-NetIPConfiguration
 
 # Check Firewall
+    #Ensure Firewall is on for Domain, Public, Local and review the firewall rules in Advanced Firewall
 
 # Run BPA
 
 # Install git-scm
 
-# Update through Windows Update
-
-
 #Check ExecutionPolicy setting
 Get-ExecutionPolicy
-Set-ExecutionPolicy AllSigned
+Set-ExecutionPolicy RemoteSigned
+
+#Check version of powershell
+(Get-Host).version
+pwsh -v
+
+# Verify TLS Version is 1.2
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 #Update Package Providers
+<<<<<<< HEAD
 Install-PackageProvider -Name Nuget -Force
 Install-PackageProvider -Name Chocolatey -Force
+=======
+Install-PackageProvider -Name Nuget
+Install-PackageProvider -Name Chocolatey
+Install-PackageProvider -Name PowershellGet
+>>>>>>> 3b81faa25ab74b8006666fd88b80bd9eee785643
 Import-Module grouppolicy
 Import-Module ad
 
@@ -33,8 +54,6 @@ Import-Module ad
 # Enable advanced features in ADUC
 # View hidden folders
 
-#Update Help
-Update-Help
 # Group Policy Objects
 
 # Remove unwanted Programs/Features/Services
@@ -51,10 +70,16 @@ Set-ADDefaultDomainPasswordPolicy -Identity <example.com> -ComplexityEnabled $tr
     #Computer Configuration\Policies\Windows Settings\Security Settings\Account Policies\Account Lockout Policy\Account lockout duration value= 15 minutes
     #Computer Configuration\Policies\Windows Settings\Security Settings\Account Policies\Account Lockout Policy\Account lockout threshold value= 3
     #Computer Configuration\Policies\Windows Settings\Security Settings\Account Policies\Account Lockout Policy\Reset account lockout counter after value= 15
+<<<<<<< HEAD
 
 
 
     #Kerberos Policy
+=======
+    
+#Kerberos Policy
+
+>>>>>>> 3b81faa25ab74b8006666fd88b80bd9eee785643
 New-GPO -Name "Kerberos Policy"
 Set-GPRegistryValue -Name "Kerberos Policy" -key "HKLM\Computer Configuration\Policies\Windows Settings\Security Settings\Account Policy\Kerberos Policy\Enforce user logon restrictions" -Type String -value enabled
 Set-GPRegistryValue -Name "Kerberos Policy" -key "HKLM\Computer Configuration\Policies\Windows Settings\Security Settings\Account Policy\Kerberos Policy\Maximum lifetime for service ticket" -Type String -value 600
@@ -62,11 +87,13 @@ Set-GPRegistryValue -Name "Kerberos Policy" -key "HKLM\Computer Configuration\Po
 Set-GPRegistryValue -Name "Kerberos Policy" -key "HKLM\Computer Configuration\Policies\Windows Settings\Security Settings\Account Policy\Kerberos Policy\Maximum lifetime for user ticket renewal" -Type String -value 7
 Set-GPRegistryValue -Name "Kerberos Policy" -key "HKLM\Computer Configuration\Policies\Windows Settings\Security Settings\Account Policy\Kerberos Policy\Maximum tolerance for computer clock synchronization" -Type String -value 5
     
-    #Local Policies
+#Local Policies
 
 New-GPO -Name "Local Policy"
 Set-GPRegistryValue -Name "Local Policy" -key "HKLM\Computer Configuration\Policies\Windows Settings\Security Settings\Local Policies\User Rights Assignment\Force shutdown from a remote system" -Type String -value "Server Operators"
-    #(Member Servers) Administrators, Server Operators (Domain Controllers)
+
+#(Member Servers) Administrators, Server Operators (Domain Controllers)
+
 Set-GPRegistryValue -Name "Local Policy" -key "HKLM\Computer Configuration\Policies\Windows Settings\Security Settings\Local Policies\User Rights Assignment\Generate security audits" -Type String -value "Local Service, Network Service"
 Set-GPRegistryValue -Name "Local Policy" -key "HKLM\Computer Configuration\Policies\Windows Settings\Security Settings\Local Policies\User Rights Assignment\Increase scheduling priority" -Type String -value "Administrators"
 Set-GPRegistryValue -Name "Local Policy" -key "HKLM\Computer Configuration\Policies\Windows Settings\Security Settings\Local Policies\User Rights Assignment\Load and unload device drivers" -Type String -value "Administrators"
@@ -160,9 +187,10 @@ New-GPO -Name "SMB Signing Negotiation"
         #Computer Configuration\Policies\Windows Settings\Security Settings\Local Policies\Security Options\Microsoft network client: Digitally sign communications (if server agrees) value= enabled
 Set-GPRegistryValue -Name "SMB Signing Negotiation" -key "HKLM\Computer Configuration\Policies\Windows Settings\Security Settings\Local Policies\Security Options\Microsoft network client: Digitally sign communications (if server agrees)" -Type String -value enabled
 
+#Update Help
+Update-Help
 
-
-
+# Update through Windows Update
 
 # PRIVILEGED ACCOUNTS GPOS
     # Enterprise Admins
@@ -179,35 +207,50 @@ Set-GPRegistryValue -Name "SMB Signing Negotiation" -key "HKLM\Computer Configur
         New-GPLink -Target "ou=administrators,dc=example,dc=example,dc=com"
         Remove-GPLink -Target "ou=administrators,dc=example,dc=example,dc=com"
 
-        Invoke-GPUpdate
+        Invoke-GPUpdate -Computer <string>
 
         Get-GPResultantSetOfPolicy
             #type html
             #C:\Users\Administrator\Desktop\rsop.html
         
         Set-ExecutionPolicy Restricted
+<<<<<<< HEAD
 # Privileged Account Creation
 
 # Configure NTP on DC
+=======
+>>>>>>> 3b81faa25ab74b8006666fd88b80bd9eee785643
 
 # LAPS
 
 # List AD Security Settings
 
-
 # Deep Blue
 
+<<<<<<< HEAD
 # Restore/Backup/Checkpoint
+
+=======
+#Install AD Explorer and create a snapshot
+AD Snapshot with AD Explorer
+https://docs.microsoft.com/en-us/sysinternals/downloads/adexplorer
+>>>>>>> 3b81faa25ab74b8006666fd88b80bd9eee785643
+
+#Privileged Access Management
+
+#Port Scan
+netstat -ano
+
+#Ping Sweep
+1..255 | % {echo "192.16.1.$_"; ping -n 1 -w 10 192.168.1.$_ | Select-String ttl}
+
+#Find Auto-starting Programs
+    #Run my PS Script
+    https://docs.microsoft.com/en-us/sysinternals/downloads/autoruns
 
 
 # Bloodhound
 
-
-# File associations
-
-
-AD Snapshot with AD Explorer
-https://docs.microsoft.com/en-us/sysinternals/downloads/adexplorer
 
 AD Insight
 https://docs.microsoft.com/en-us/sysinternals/downloads/adinsight

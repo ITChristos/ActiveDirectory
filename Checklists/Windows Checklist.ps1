@@ -79,8 +79,10 @@ https://docs.microsoft.com/en-us/sysinternals/downloads/autoruns
 
 # 12. Processes and Open Ports 
 netstat -ano
+
 # procmon
 https://docs.microsoft.com/en-us/sysinternals/downloads/procmon
+
 # tcpview
 https://docs.microsoft.com/en-us/sysinternals/downloads/tcpview
 
