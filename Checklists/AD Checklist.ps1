@@ -176,6 +176,22 @@ Update-Help
 
 # Update through Windows Update
 
+#Enable Auditing in GPO in Default Domain Policy
+
+# Audit Policy
+auditpol.exe /get /Category:* /r
+# Remote Computer
+$ItemName = “DC1.TechGenix.com”
+$AuditStatus = Invoke-Command -ComputerName $ItemName -Script { auditpol.exe /get /Category:* /r
+# User Specific Audit policy
+auditpol /get /user:{S-1-5-21-1443922412-3030960370-963420232-51} /category:System,detailed Tracking,Object Access
+auditpol /get /user:guest /category:detailed Tracking /r
+
+#Find files in current directory that have been modified in certain time frame (days)
+Get-ChildItem -Path . -Recurse| Where-Object {$_.LastWriteTime -gt (Get-Date).AddDays(-4)}
+
+# Event Viewer Windows Logs -> Security -> Right-click -> Create Custom View
+
 # PRIVILEGED ACCOUNTS GPOS
     # Enterprise Admins
 
