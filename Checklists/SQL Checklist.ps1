@@ -2,6 +2,8 @@
 
 #Configure Firewall
 
+#Change SA username
+
 #Vulnerability Assessment in SSMS
 
 #Data Discovery and Classification
@@ -14,7 +16,7 @@
 
 #Remove BUILTIN\Administrators group from SQL Server Logins
 
-#Configure Windows Authentication
+#Configure Windows Authentication only
 
 #No Shared Logins
 
