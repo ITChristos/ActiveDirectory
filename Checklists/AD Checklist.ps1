@@ -1,16 +1,12 @@
 # Change Password
     #Ctrl + Alt + Del -> Change a Password
 
-<<<<<<< HEAD
-# Allow downloads
-=======
 # Check and Install powershell script
     #Get current PS version
     Get-host | select-object Version
 
     #Update to most current stable release
     Invoke-Expression "& { $(Invoke-RestMethod https://aka.ms/install-powershell.ps1) } -UseMSI"
->>>>>>> 3b81faa25ab74b8006666fd88b80bd9eee785643
 
 # Check and Install powershell update script
 Get-Host
@@ -39,14 +35,9 @@ pwsh -v
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 #Update Package Providers
-<<<<<<< HEAD
-Install-PackageProvider -Name Nuget -Force
-Install-PackageProvider -Name Chocolatey -Force
-=======
 Install-PackageProvider -Name Nuget
 Install-PackageProvider -Name Chocolatey
 Install-PackageProvider -Name PowershellGet
->>>>>>> 3b81faa25ab74b8006666fd88b80bd9eee785643
 Import-Module grouppolicy
 Import-Module ad
 
@@ -70,16 +61,9 @@ Set-ADDefaultDomainPasswordPolicy -Identity <example.com> -ComplexityEnabled $tr
     #Computer Configuration\Policies\Windows Settings\Security Settings\Account Policies\Account Lockout Policy\Account lockout duration value= 15 minutes
     #Computer Configuration\Policies\Windows Settings\Security Settings\Account Policies\Account Lockout Policy\Account lockout threshold value= 3
     #Computer Configuration\Policies\Windows Settings\Security Settings\Account Policies\Account Lockout Policy\Reset account lockout counter after value= 15
-<<<<<<< HEAD
-
-
-
-    #Kerberos Policy
-=======
     
 #Kerberos Policy
 
->>>>>>> 3b81faa25ab74b8006666fd88b80bd9eee785643
 New-GPO -Name "Kerberos Policy"
 Set-GPRegistryValue -Name "Kerberos Policy" -key "HKLM\Computer Configuration\Policies\Windows Settings\Security Settings\Account Policy\Kerberos Policy\Enforce user logon restrictions" -Type String -value enabled
 Set-GPRegistryValue -Name "Kerberos Policy" -key "HKLM\Computer Configuration\Policies\Windows Settings\Security Settings\Account Policy\Kerberos Policy\Maximum lifetime for service ticket" -Type String -value 600
@@ -214,12 +198,6 @@ Update-Help
             #C:\Users\Administrator\Desktop\rsop.html
         
         Set-ExecutionPolicy Restricted
-<<<<<<< HEAD
-# Privileged Account Creation
-
-# Configure NTP on DC
-=======
->>>>>>> 3b81faa25ab74b8006666fd88b80bd9eee785643
 
 # LAPS
 
@@ -227,14 +205,9 @@ Update-Help
 
 # Deep Blue
 
-<<<<<<< HEAD
-# Restore/Backup/Checkpoint
-
-=======
 #Install AD Explorer and create a snapshot
 AD Snapshot with AD Explorer
 https://docs.microsoft.com/en-us/sysinternals/downloads/adexplorer
->>>>>>> 3b81faa25ab74b8006666fd88b80bd9eee785643
 
 #Privileged Access Management
 
